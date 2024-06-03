@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Add a new quote{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <label for="tags">Tags:</label>
+    {{ form.tags }}
+    
+    <label for="author">Author:</label>
+    {{ form.author }}
+
+    <label for="quote">Quote:</label>
+    {{ form.quote }}
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

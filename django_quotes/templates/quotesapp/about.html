@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}About {{ author.fullname }}{% endblock %}
+
+{% block content %}
+<p><h1>{{ author.fullname }}</h1></p>
+<p>
+    <strong>Born:</strong>
+    <span>{{ author.born_date }} {{ author.born_location }}</span>
+</p>
+<p><strong>Description:</strong></p>
+<div>{{ author.description }}</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Add a new Author{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <label for="fullname">Full Name:</label>
+    {{ form.fullname }}
+
+    <label for="born_day">Born day:</label>
+    {{ form.born_day }}
+
+    <label for="born_month">Born month:</label>
+    {{ form.born_month }}
+
+    <label for="born_year">Born year:</label>
+    {{ form.born_year }}
+
+    <label for="born_location">Born Location:</label>
+    {{ form.born_location }}
+
+    <label for="description">Description:</label>
+    {{ form.description }}
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

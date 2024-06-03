@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Quotes site{% endblock %}
+
+{% block content %}
+<div>
+    <div>
+        <h2>Quotes</h2>
+        <div>
+            {% for quote in quotes %}
+            <div class="quote" style="padding: 10px; margin: 10px; outline: 2px solid;">
+                <span class="text">{{ quote.quote }}</span>
+                <br>
+                by <span class="author" style="color:#288cc2;"><small><strong>{{ quote.author.fullname }}</strong></small>
+                    <a href="{% url 'quotesapp:about' author_id=quote.author.id %}">(about)</a>
+                </span>
+                <div class="tags">
+                    Tags:
+                    <span>
+                    {% for tag in quote.tags %}
+                    <a class="tag" href="#">{{ tag }}</a>
+                    {% endfor %}
+                    </span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+            {% if is_paginated %}
+        <nav style="display: flex; justify-content: center; align-items: center;">
+            <div>
+                <ul class="pager">
+                    {% if page_obj.has_previous %}
+                    <span><li><button type="button" class="outline secondary"><a href="?page=1" style="text-decoration: none; color: #969eaf;">First</a></button></li>
+                    <li><button type="button" class="primary"><a href="?page={{ page_obj.previous_page_number }}" style="text-decoration: none; color: #ffffff;">Previous</a></button></li>
+                    {% endif %}
+                    <li><span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span></li>
+                    {% if page_obj.has_next %}
+                    <li><button type="button" class="primary"><a href="?page={{ page_obj.next_page_number }}" style="text-decoration: none; color: #ffffff;">Next</a></button></li>
+                    <li><button type="button" class="outline secondary"><a href="?page={{ page_obj.paginator.num_pages }}" style="text-decoration: none; color: #969eaf;">Last</a></button></li>
+                    {% endif %}
+                </ul>
+          </div>
+        </nav>
+        {% endif %}
+    </div>
+{% endblock %}

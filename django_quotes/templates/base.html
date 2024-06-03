@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Quotes site{% endblock %}</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <main class="container">
+        <nav style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px">
+            <ul>
+                <li><a href="/" role="button" class="outline secondary"> Go back to the main page </a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'quotesapp:add_quote' %}" role="button">Add Quote</a></li>
+                <li><a href="{% url 'quotesapp:add_author' %}" role="button">Add Author</a></li>
+                </ul>
+                <ul style="float: right;">    
+                    <li>Welcome <strong>{{ user.username }}!</strong></li>
+                    <li><a href="{% url 'users:logout' %}" role="button">Log Out</a></li>
+                </ul>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                </ul>
+                <ul style="float: right;">
+                <li><a href="{% url 'users:login' %}" role="button">Log In</a></li>
+                <li><a href="{% url 'users:signup' %}" role="button">Register</a></li>
+                </ul>
+                {% endif %}
+            </ul>
+        </nav>
+        {% block content %} {% endblock %}    
+    </main>
+</body>
+</html>
